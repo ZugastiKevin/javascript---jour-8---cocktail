@@ -2,8 +2,6 @@ const navItem = document.querySelectorAll('.nav-item')
 const list = document.getElementById('list')
 const modal = document.getElementById('modal')
 
-window.addEventListener("click", outsideClick);
-
 navItem[0].classList.add('active')
 
 async function fetchData(category) {
@@ -25,7 +23,7 @@ navItem.forEach(item => {
 })
 
 function outsideClick(event) {
-    if (!modal.contains(event.target)) {
+    if (event.currentTarget !== modal) {
         modal.style.display = "none";
         window.removeEventListener("click", outsideClick);
     };
@@ -57,6 +55,7 @@ async function seeModal(id) {
     
     const instructions = document.getElementById('drink-instructions')
     instructions.textContent = drink.strInstructions
+    window.addEventListener("click", outsideClick);
 }    
 
 function addItems(drinks) {
